@@ -1,4 +1,5 @@
 require_relative '../config/environment.rb'
+require_relative './spec_helper.rb'
 
 describe "User" do
     let(:song) { Song.new("In the Aeroplane Over the Sea") }
@@ -53,7 +54,7 @@ describe "User" do
         it "will read @@all" do
         new_method = User.new
 
-        new_method_method = new_method.instance_variable_get(:@name)
+        new_method_method = new_method.instance_variable_get(:@@all)
 
         expect(new_song_name).to eq("Something")
         end

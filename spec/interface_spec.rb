@@ -1,4 +1,5 @@
 require_relative '../config/environment.rb'
+require_relative './spec_helper.rb'
 
 describe "Interface" do
     let(:song) { Song.new("In the Aeroplane Over the Sea") }

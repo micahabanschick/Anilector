@@ -8,3 +8,4 @@ Project Notes & Ideas
 - ask user for favorites genres
 - ask user for top 5 favorite shows and movies
 - scrape user's given info off of IMBd
+- scrape user's genres from favorite shows and movies

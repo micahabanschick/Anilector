@@ -2,7 +2,7 @@ require_relative '../config/environment.rb'
 require_relative './spec_helper.rb'
 
 describe "User" do
-    #let(:song) { Song.new("In the Aeroplane Over the Sea") }
+    let!(:user) { User.new("Bob") }
   
     describe "#to_be_determined" do
         it "will be decided in the future" do
@@ -50,31 +50,55 @@ describe "User" do
 
     describe ".save" do
         it "will save self to @@all" do
-        new_method = User.new("Bob")
+            new_method = User.new("Bob")
 
-        new_method_method = new_method.instance_variable_get(:@name)
+            new_method_method = new_method.instance_variable_get(:@name)
 
-        expect(new_method_method).to eq("Something")
+            expect(new_method_method).to eq("Something")
         end
     end
 
     describe ".all" do
         it "returns the class variable @@all" do
-          expect(User.all).to match_array([])
-    
-          User.class_variable_set(:@@all, [song])
-    
-          expect(User.all).to match_array([song])
+            expect(User.all).to match_array([])
+
+            User.class_variable_set(:@@all, [song])
+
+            expect(User.all).to match_array([song])
         end
     end
 
-    describe "#genres" do
+    describe "#name" do 
+        it "will read the name" do
+            user_name = user.instance_variable_get(:@name)
+
+            expect(user_name).to_eq("Bob")
+        end 
+    end
+
+    describe "#genres=" do
         it "will read @genres as array" do
-        new_method = User.new("Bob")
+            new_method = User.new("Bob")
 
-        new_method_method = new_method.instance_variable_get(:@genres)
+            new_method_method = new_method.instance_variable_get(:@genres)
 
-        expect(new_method_method).to eq("Something")
+            expect(new_method_method).to eq("Something")
+        end
+    end
+
+    describe "#media=" do
+        it "will ask the user for their top 5 pieces of entertainment" do
+            allow($stdin).to receive(:gets).and_return('foo1, foo2, foo3, foo4, foo5')
+            name = $stdin.gets
+        
+            expect(name).to eq("foo1, foo2, foo3, foo4, foo5")
+        end
+
+        it "will output the input as an array" do
+            user = User.new("Bob")
+            array = ["foo1","foo2","foo3","foo4","foo5"]
+        
+            expect(user.media).to match_array(array)
         end
     end
 

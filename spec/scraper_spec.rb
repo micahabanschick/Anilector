@@ -2,7 +2,7 @@ require_relative '../config/environment.rb'
 require_relative './spec_helper.rb'
 
 describe "Scraper" do
-    let(:song) { Song.new("In the Aeroplane Over the Sea") }
+    let!(:scraper) { Scraper.new }
   
     describe "#to_be_determined" do
       it "will be decided in the future" do
@@ -14,17 +14,17 @@ describe "Scraper" do
       end
     end
 
-    describe "#top_anime" do
+    describe "#anime" do
         it "will scrape the top 20 anime off of MAL" do
-          new_method = Scraper.new
+          #scraper = Scraper.new
     
-          new_method_method = new_method.instance_variable_get(:@name)
+          anime_method = scraper.anime("https://myanimelist.net/topanime.php")
     
-          expect(new_song_name).to eq("Something")
+          expect(anime_method).to eq("Something")
         end
       end
 
-      describe "#top_anime_from_each_genre" do
+      describe "#anime_from_each_genre" do
         it "will scrape the top 3 anime from each genre on MAL into a hash" do
           new_method = Scraper.new
     

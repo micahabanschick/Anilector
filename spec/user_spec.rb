@@ -4,16 +4,6 @@ require_relative './spec_helper.rb'
 describe "User" do
     let!(:user) { User.new("Bob") }
   
-    describe "#to_be_determined" do
-        it "will be decided in the future" do
-        new_method = User.new
-
-        new_method_method = new_method.instance_variable_get(:@name)
-
-        expect(new_song_name).to eq("Something")
-        end
-    end
-
     describe "@@all" do
         it "is initialized as an empty array" do
           all = User.class_variable_get(:@@all)
@@ -40,9 +30,7 @@ describe "User" do
         end
         
         it "will save user to @@all" do
-            new_method = User.new("Bob")
-        
-            new_method_method = new_method.instance_variable_get(:@name)
+            new_method_method = usr.instance_variable_get(:@name)
         
             expect(new_song_name).to eq("Something")
         end
@@ -78,11 +66,9 @@ describe "User" do
 
     describe "#genres=" do
         it "will read @genres as array" do
-            new_method = User.new("Bob")
+            new_method_method = user.instance_variable_get(:@genres)
 
-            new_method_method = new_method.instance_variable_get(:@genres)
-
-            expect(new_method_method).to eq("Something")
+            expect(new_method_method).to match_array([])#eq("Something")
         end
     end
 

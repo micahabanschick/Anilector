@@ -3,6 +3,9 @@ require_relative './spec_helper.rb'
 
 describe "Scraper" do
     let!(:scraper) { Scraper.new }
+
+    let!(:anime_array) {[{:name=>"Fullmetal Alchemist: Brotherhood", :genres=>["Action", "Military", "Adventure", "Comedy", "Drama", "Magic", "Fantasy", "Shounen"]},
+                            {:name=>"Gintama°", :genres=>["Action", "Comedy", "Historical", "Parody", "Samurai", "Sci-Fi", "Shounen"]}]}
   
     describe "#to_be_determined" do
       it "will be decided in the future" do
@@ -20,7 +23,7 @@ describe "Scraper" do
     
           anime_method = scraper.anime("https://myanimelist.net/topanime.php")
     
-          expect(anime_method).to eq("Something")
+          expect(anime_method).to eq(anime_array)
         end
       end
 
@@ -34,7 +37,7 @@ describe "Scraper" do
         end
       end
 
-      describe "#top_entertainment" do
+      describe "#media_genres" do
         it "will scrape the user's 5 given movies or shows from IMBd" do
           new_method = Scraper.new
     

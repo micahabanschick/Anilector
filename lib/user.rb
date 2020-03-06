@@ -4,12 +4,12 @@ class User
 
     @@all = []
 
-    def initialize(name)
-        @name = name 
+    def initialize(name=nil)
+        @name = name if name != nil 
         self.save 
     end 
 
-    def self.save 
+    def save 
         @@all << self 
     end 
 
@@ -21,7 +21,7 @@ class User
         puts "Please insert your top 3 favorite genres from most favorite to least favorite."
         genre_input = gets.strip
         genre_array = genre_input.split(",").map{|genre| genre.strip}
-        @genres = genre_array
+        @genres = genre_array.map{|genre| {:gengre=>0}}
     end 
 
     def media=(media)

@@ -4,8 +4,8 @@ class User
 
     @@all = []
 
-    def initialize(name=nil)
-        @name = name if name != nil 
+    def initialize(name="Stranger")
+        @name = name 
         self.save 
     end 
 
@@ -22,13 +22,6 @@ class User
         genre_input = gets.strip
         genre_array = genre_input.split(",").map{|genre| genre.strip}
         @genres = genre_array.map{|genre| {:genre=>0}}
-    end 
-
-    def media=(media)
-        puts "Please insert your top 5 favorite movies and/or shows from most favorite to least favorite"
-        medium_input = gets.strip 
-        medium_array = medium_input.split(",").map{|medium| medium.strip}
-        @media = medium_array
     end 
 
 end 

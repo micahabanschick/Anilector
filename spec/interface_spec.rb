@@ -2,15 +2,13 @@ require_relative '../config/environment.rb'
 require_relative './spec_helper.rb'
 
 describe "Interface" do
-    let(:song) { Song.new("In the Aeroplane Over the Sea") }
+    let(:interface) { Interface.new(User.new("Bob")) }
   
     describe "#to_be_determined" do
       it "will be decided in the future" do
-        new_method = Interface.new
+        #new_method_method = interface.instance_variable_get(:@name)
   
-        new_method_method = new_method.instance_variable_get(:@name)
-  
-        expect(new_song_name).to eq("Something")
+        expect(interface.user.name).to eq("Bob")
       end
     end
 

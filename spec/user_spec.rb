@@ -64,27 +64,15 @@ describe "User" do
         end 
     end
 
-    describe "#genres=" do
+    describe "#genres" do
+        it "will ask user for 3 genres" do
+            expect(user.genres).to receive(:gets).and_return("Action, Fantasy, Thriller") 
+        end 
+
         it "will read @genres as array" do
             new_method_method = user.instance_variable_get(:@genres)
 
-            expect(new_method_method).to match_array([])#eq("Something")
-        end
-    end
-
-    describe "#media=" do
-        it "will ask the user for their top 5 pieces of entertainment" do
-            allow($stdin).to receive(:gets).and_return('foo1, foo2, foo3, foo4, foo5')
-            name = $stdin.gets
-        
-            expect(name).to eq("foo1, foo2, foo3, foo4, foo5")
-        end
-
-        it "will output the input as an array" do
-            user = User.new("Bob")
-            array = ["foo1","foo2","foo3","foo4","foo5"]
-        
-            expect(user.media).to match_array(array)
+            expect(user.genres).to be_a(Array)
         end
     end
 

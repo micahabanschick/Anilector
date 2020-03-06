@@ -26,11 +26,7 @@ describe "Scraper" do
     ]}
   
     describe "#anime_from_each_genre" do
-        it "will ask user for 3 genres" do
-            expect(scraper).to receive(:gets).and_return("Action, Fantasy, Thriller") 
-        end     
-
-        it "will scrape the top 5 anime from each genre on MAL into a hash" do
+         it "will scrape the top 5 anime from each genre on MAL into a hash" do
             new_method = Scraper.new
 
             anime_url = "https://myanimelist.net/anime.php"

@@ -30,7 +30,7 @@ describe "Scraper" do
             new_method = Scraper.new
 
             anime_url = "https://myanimelist.net/anime.php"
-            scraped_anime = scraper.anime_from_each_genre(anime_url)
+            scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
             expect(scraped_students).to be_a(Array)
             expect(scraped_students.first).to have_key(:genre)
             expect(scraped_students.first).to have_key(:anime)

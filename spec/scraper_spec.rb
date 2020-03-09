@@ -31,10 +31,10 @@ describe "Scraper" do
 
             anime_url = "https://myanimelist.net/anime.php"
             scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
-            expect(scraped_students).to be_a(Array)
-            expect(scraped_students.first).to have_key(:genre)
-            expect(scraped_students.first).to have_key(:anime)
-            expect(scraped_students).to include(anime_array[0], anime_array[1], anime_array[2])
+            expect(scraped_anime).to be_a(Array)
+            expect(scraped_anime.first).to have_key(:genre)
+            expect(scraped_anime.first).to have_key(:anime)
+            expect(scraped_anime).to include(anime_array[0], anime_array[1], anime_array[2])
         end
     end
 

@@ -3,26 +3,10 @@ class Scraper
 
     def anime_from_each_genre(site, genres)
         #an array whose elements reveal the information for 5 anime from each given genre
-        binding.pry 
+        #binding.pry 
         outer_array = [outer_hash(site, genres, 0), outer_hash(site, genres, 1), outer_hash(site, genres, 2)]
         #binding.pry
     end 
-
-    def choices(site, genres)
-        results = anime_from_each_genre(site, genres)
-
-        includes_two = results.map{|genre| genre[:anime].filter{|anime| anime[:genres].include?(genres[0]) && anime[:genres].include?(genres[1]) || anime[:genres].include?(genres[0]) && anime[:genres].include?(genres[2]) || anime[:genres].include?(genres[1]) && anime[:genres].include?(genres[2])}}.flatten.uniq 
-
-        includes_three = includes_two.filter{|anime| anime[:genres].include?(genres[0]) && anime[:genres].include?(genres[1]) && anime[:genres].include?(genres[2])}
-
-        if includes_three.length > 0
-            includes_three
-        elsif includes_two.length > 0 
-            includes_two 
-        else 
-            results 
-        end 
-    end
 
     def appendage(site, genres, index)
         #end piece added on to the site to get to the genre's page

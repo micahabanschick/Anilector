@@ -43,6 +43,37 @@ class Interface
         end
     end 
 
+    def choices(site)
+        results = self.scraper.anime_from_each_genre(site, self.user.genres)
+
+        includes_two = results.map{|genre| genre[:anime].filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) || anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[2]) || anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}}.flatten.uniq 
+
+        includes_three = includes_two.filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}
+
+        if includes_three.length > 0
+            includes_three
+        elsif includes_two.length > 0 
+            includes_two 
+        else 
+            results 
+        end 
+    end
+
+    def results(site)
+        choices = self.choices(site)
+        if choices.length == 1 
+            puts "We recommend you start with this #{choices[0][:genres][0]} series called #{choices[0][:name]}."
+            puts "We hope you enjoy!"
+        elsif choices.length == 2 
+            puts "We've narrowed your search down to these two choices: #{results.join(" and ")}."
+            puts "We hope you enjoy!"
+        else
+            results = choices.filter{|anime| choices.index(anime) < 3}
+            puts "We've narrowed your search down to these three choices: #{results.join(", ").gsub(results[2],"and #{results[2]}")}."
+            puts "We hope you enjoy!"
+        end 
+    end 
+
     def run(site)
         #binding.pry
         self.start 
@@ -51,7 +82,7 @@ class Interface
         puts "Please enter your three favorite genres."
         self.user_genres 
         #anime_url = "https://myanimelist.net/anime.php"
-        puts self.scraper.anime_from_each_genre(site, self.user.genres)[0][:anime][0][:name]
+        self.results(site)
         #
         #
         ######################################################

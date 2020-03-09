@@ -2,5 +2,6 @@
 
 require_relative '../config/environment.rb' 
 
+site = "https://myanimelist.net/anime.php"
 test = Interface.new
-test.run
+test.run(site)

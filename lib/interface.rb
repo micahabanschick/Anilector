@@ -43,15 +43,15 @@ class Interface
         end
     end 
 
-    def run
-        binding.pry
+    def run(site)
+        #binding.pry
         self.start 
         puts "Do stuff!!!!!!!!!!!!!!!!!!!!!!"
         ##########################################################
         puts "Please enter your three favorite genres."
         self.user_genres 
-        anime_url = "https://myanimelist.net/anime.php"
-        self.scraper.anime_from_each_genre(anime_url, self.user.genres)[0][:anime][0]
+        #anime_url = "https://myanimelist.net/anime.php"
+        self.scraper.anime_from_each_genre(site, self.user.genres)[0][:anime][0][:name]
         #
         #
         ######################################################

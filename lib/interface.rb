@@ -77,31 +77,34 @@ class Interface
     def run(site)
         #binding.pry
         self.start 
-        puts "Do stuff!!!!!!!!!!!!!!!!!!!!!!"
-        ##########################################################
         puts "Please enter your three favorite genres."
-        self.user_genres 
-        #anime_url = "https://myanimelist.net/anime.php"
+        puts "If you would like to see what genres translate to anime, enter 'list genres'."
+        self.user_genres(site) 
         self.results(site)
-        #
-        #
-        ######################################################
         puts "Would you like to try again with new entries?"
         self.binary 
     end 
 
-    def user_genres
+    def user_genres(site)
+        list = self.scraper.genre_list(site)
         input = gets.strip
-        if !input.match(/,/)
+        if input == "list genres"
+            puts list.join(", ").gsub(list[list.length - 1], "and #{list[list.length - 1]}")
+            self.user_genres(site)
+        elsif !input.match(/,/)
             puts "Invalid entry!"
             puts "Please separate each genre with a comma."
-            self.user_genres 
+            self.user_genres(site)
         elsif input.split(",").length != 3
             puts "Invalid number of genres!"
             puts "Please enter no more or less than 3 genres."
-            self.user_genres  
+            self.user_genres(site)  
+        elsif input.split(",").map{|elem| elem.strip.capitalize}.any?{|ind| !list.include?(ind)}
+            puts "Invalid genre!"
+            puts "Please enter a genre that can be found in anime, or enter 'list genres' to see your options."
+            self.user_genres(site)
         else 
-            self.user.genres = input.split(",").map{|genre| genre.strip.uppercase}
+            self.user.genres = input.split(",").map{|genre| genre.strip.capitalize}
         end 
     end 
 

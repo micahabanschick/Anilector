@@ -12,15 +12,7 @@ describe "User" do
         end 
     end
 =end 
-    describe "#genres" do
-        it "will ask user for 3 genres" do
-            allow($stdout).to receive(:puts)
-
-            new_genres = user.instance_variable_get(:@genres)
-
-            expect(new_genres).to receive(:gets).and_return("Action, Fantasy, Thriller") 
-        end 
-
+    describe "#name" do 
         it "will read @genres as array" do
             new_genres = user.instance_variable_get(:@genres)
 

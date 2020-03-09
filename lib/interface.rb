@@ -44,13 +44,14 @@ class Interface
     end 
 
     def run
+        binding.pry
         self.start 
-        "Do stuff!!!!!!!!!!!!!!!!!!!!!!"
+        puts "Do stuff!!!!!!!!!!!!!!!!!!!!!!"
         ##########################################################
         puts "Please enter your three favorite genres."
         self.user_genres 
         anime_url = "https://myanimelist.net/anime.php"
-        self.scraper.anime_from_each_genre(anime_url, genres)
+        self.scraper.anime_from_each_genre(anime_url, self.user.genres)[0][:anime][0]
         #
         #
         ######################################################
@@ -60,7 +61,7 @@ class Interface
 
     def user_genres
         input = gets.strip
-        if input.match(/,/) != true
+        if !input.match(/,/)
             puts "Invalid entry!"
             puts "Please separate each genre with a comma."
             self.user_genres 

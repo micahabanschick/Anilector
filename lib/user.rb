@@ -1,6 +1,6 @@
 class User
 
-    attr_accessor :name, :genres, :media 
+    attr_accessor :name, :genres
 
     @@all = []
 
@@ -18,10 +18,7 @@ class User
     end 
 
     def genres
-        puts "Please insert your top 3 favorite genres from most favorite to least favorite."
-        genre_input = gets.strip
-        genre_array = genre_input.split(",").map{|genre| genre.strip}
-        @genres = genre_array.map{|genre| {:genre=>0}}
+        @genres
     end 
 
 end 

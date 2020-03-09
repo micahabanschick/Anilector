@@ -51,7 +51,7 @@ class Interface
         puts "Please enter your three favorite genres."
         self.user_genres 
         #anime_url = "https://myanimelist.net/anime.php"
-        self.scraper.anime_from_each_genre(site, self.user.genres)[0][:anime][0][:name]
+        puts self.scraper.anime_from_each_genre(site, self.user.genres)[0][:anime][0][:name]
         #
         #
         ######################################################

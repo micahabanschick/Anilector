@@ -18,7 +18,7 @@ class Scraper
         site.gsub("/anime.php", appendage(site, genres, index))
     end 
 
-    def doc(site)
+    def doc(site)   
         Nokogiri::HTML.parse(open(site))
     end
 

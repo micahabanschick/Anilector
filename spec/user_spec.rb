@@ -14,7 +14,7 @@ describe "User" do
 =end 
     describe "#name" do 
         it "will read @genres as array" do
-            new_genres = user.instance_variable_get(:@genres)
+            user_genres = user.instance_variable_get(:@genres)
 
             expect(user_genres).to be_a(Array)
             expect(user_genres).to_eq(["Action", "Fantasy", "Thriller"])

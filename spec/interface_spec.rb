@@ -8,7 +8,7 @@ describe "Interface" do
       it "will run the program" do
         #new_method_method = interface.instance_variable_get(:@name)
   
-        expect(interface.user.name).to eq("Stranger")
+        expect(interface.user.name).to eq("Bob")
       end
     end
 

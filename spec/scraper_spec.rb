@@ -26,14 +26,28 @@ describe "Scraper" do
     ]}
   
     describe "#anime_from_each_genre" do
-         it "will scrape the top 5 anime from each genre on MAL into a hash" do
-            new_method = Scraper.new
-
+         it "will output an array" do
             anime_url = "https://myanimelist.net/anime.php"
+
             scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
+
             expect(scraped_anime).to be_a(Array)
+        end
+
+        it "will have :genre and :anime" do
+            anime_url = "https://myanimelist.net/anime.php"
+
+            scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
+            
             expect(scraped_anime.first).to have_key(:genre)
             expect(scraped_anime.first).to have_key(:anime)
+        end
+
+        it "will scrape the top 5 anime from each genre on MAL into a hash" do
+            anime_url = "https://myanimelist.net/anime.php"
+
+            scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
+
             expect(scraped_anime).to include(anime_array[0], anime_array[1], anime_array[2])
         end
     end

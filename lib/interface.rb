@@ -101,7 +101,7 @@ class Interface
             puts "Please enter no more or less than 3 genres."
             self.user_genres  
         else 
-            self.user.genres = input.split(",").map{|genre| genre.strip}
+            self.user.genres = input.split(",").map{|genre| genre.strip.uppercase}
         end 
     end 
 

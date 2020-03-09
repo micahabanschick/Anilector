@@ -8,6 +8,11 @@ class Scraper
         #binding.pry
     end 
 
+    def genre_list(site) 
+        document = doc(site)
+        document.css("div.genre-list.al").map{|genre| genre.text.gsub(/(\(\d{1}\,?\d+\))/,"").strip if genre.children[0].attributes.values[0].value.include?("/genre/")}.filter{|text| text != nil}
+    end
+
     def appendage(site, genres, index)
         #end piece added on to the site to get to the genre's page
         doc(site).css("a.genre-name-link").find{|genre| genre.text.match(genres[index])}.attributes.values[0].value

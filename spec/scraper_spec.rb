@@ -24,7 +24,29 @@ describe "Scraper" do
             {:name=>"Re:Zero kara Hajimeru Isekai Seikatsu", :genres=>["Psychological", "Drama", "Thriller", "Fantasy"]},
             {:name=>"Another", :genres=>["Mystery", "Horror", "Supernatural", "Thriller", "School"]}]},   
     ]}
-  
+
+    let!(:list_of_genres) {[
+        "Action","Adventure","Cars","Comedy","Dementia","Demons","Drama","Ecchi","Fantasy","Game","Harem","Hentai","Historical","Horror","Josei","Kids","Magic","Martial Arts","Mecha","Military","Music","Mystery","Parody","Police","Psychological","Romance","Samurai","School","Sci-Fi","Seinen","Shoujo","Shoujo Ai","Shounen","Shounen Ai","Slice of Life","Space","Sports","Super Power","Supernatural","Thriller","Vampire","Yaoi","Yuri"
+    ]}
+    
+    describe "#genre_list" do
+        it "will output an array" do
+            anime_url = "https://myanimelist.net/anime.php"
+
+            scraped_genres = scraper.genre_list(anime_url)
+
+            expect(scraped_genres).to be_a(Array)
+        end
+
+        it "will output all possible genres" do
+           anime_url = "https://myanimelist.net/anime.php"
+
+           scraped_genres = scraper.genre_list(anime_url)
+
+           expect(scraped_genres).to include(list_of_genres)
+       end
+    end 
+
     describe "#anime_from_each_genre" do
          it "will output an array" do
             anime_url = "https://myanimelist.net/anime.php"

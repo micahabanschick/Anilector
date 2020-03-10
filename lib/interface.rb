@@ -44,9 +44,9 @@ class Interface
     end 
 
     def choices(site)
-        results = self.scraper.anime_from_each_genre(site, self.user.genres)
+        includes_one = self.scraper.anime_from_each_genre(site, self.user.genres)
 
-        includes_two = results.map{|genre| genre[:anime].filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) || anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[2]) || anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}}.flatten.uniq 
+        includes_two = includes_one.map{|genre| genre[:anime].filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) || anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[2]) || anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}}.flatten.uniq 
 
         includes_three = includes_two.filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}
 
@@ -55,7 +55,7 @@ class Interface
         elsif includes_two.length > 0 
             includes_two 
         else 
-            results 
+            includes_one  
         end 
     end
 
@@ -63,14 +63,65 @@ class Interface
         choices = self.choices(site)
         if choices.length == 1 
             puts "We recommend you start with this #{choices[0][:genres][0]} series called #{choices[0][:name]}."
+            puts ""
+            puts "Here's a synopsis:"
+            puts choices[0][:synopsis]
+            puts ""
             puts "We hope you enjoy!"
         elsif choices.length == 2 
-            puts "We've narrowed your search down to these two choices: #{results.join(" and ")}."
-            puts "We hope you enjoy!"
+            results = choices.filter{|anime| choices.index(anime) < 2}
+            puts "We've narrowed your search down to two choices."
+            puts "This final step is up to YOU!"
+            puts "We'll provide a synopsis of each and you'll pick which description sounds the most appealing by entering \"1\" or \"2\"."
+            puts ""
+            puts "1:"
+            puts results[0][:synopsis]
+            puts ""
+            puts "2:"
+            puts results[1][:synopsis]
+            best = gets.strip 
+            case best 
+            when "1"
+                puts "We recommend you start with this #{results[0][:genres][0]} series called #{results[0][:name]}."
+                puts "We hope you enjoy!"
+            when "2"
+                puts "We recommend you start with this #{results[1][:genres][0]} series called #{results[1][:name]}."
+                puts "We hope you enjoy!"
+            else 
+                puts "Invalid entry!"
+                puts "Please enter \"1\" or \"2\"."
+                self.results
+            end
         else
             results = choices.filter{|anime| choices.index(anime) < 3}
-            puts "We've narrowed your search down to these three choices: #{results.join(", ").gsub(results[2],"and #{results[2]}")}."
-            puts "We hope you enjoy!"
+            puts "We've narrowed your search down to three choices."
+            puts "This final step is up to YOU!"
+            puts "We'll provide a synopsis of each and you'll pick which description sounds the most appealing by entering \"1\", \"2\", or \"3\"."
+            puts ""
+            puts "1:"
+            puts results[0][:synopsis]
+            puts ""
+            puts "2:"
+            puts results[1][:synopsis]
+            puts ""
+            puts "3:"
+            puts results[2][:synopsis]
+            best = gets.strip 
+            case best 
+            when "1"
+                puts "We recommend you start with this #{results[0][:genres][0]} series called #{results[0][:name]}."
+                puts "We hope you enjoy!"
+            when "2"
+                puts "We recommend you start with this #{results[1][:genres][0]} series called #{results[1][:name]}."
+                puts "We hope you enjoy!"
+            when "3"
+                puts "We recommend you start with this #{results[2][:genres][0]} series called #{results[2][:name]}."
+                puts "We hope you enjoy!"
+            else 
+                puts "Invalid entry!"
+                puts "Please enter \"1\", \"2\", or \"3\"."
+                self.results
+            end
         end 
     end 
 
@@ -81,6 +132,8 @@ class Interface
         puts "If you would like to see what genres translate to anime, enter 'list genres'."
         self.user_genres(site) 
         self.results(site)
+        puts ""
+        puts ""
         puts "Would you like to try again with new entries?"
         self.binary 
     end 

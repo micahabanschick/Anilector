@@ -10,7 +10,8 @@ class Scraper
 
     def synopsis(site, genres, doc_index, anime_index)
         #returns the plot of the given anime 
-        doc(anime_site(site, genres, doc_index, anime_index)).css("span[itemprop=\"description\"]").text.gsub(/\r\n\r\n/,"\n\n\t")
+        doc(anime_site(site, genres, doc_index, anime_index)).css("span[itemprop=\"description\"]").text
+        #doc(anime_site(site, genres, doc_index, anime_index)).css("span[itemprop=\"description\"]").text.gsub(/\r\n\r\n/,"\n\n\t")
         #binding.pry 
     end 
 

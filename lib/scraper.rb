@@ -3,7 +3,6 @@ class Scraper
 
     def anime_from_each_genre(site, genres)
         #an array whose elements reveal the information for 5 anime from each given genre
-        #binding.pry 
         outer_array = [outer_hash(site, genres, 0), outer_hash(site, genres, 1), outer_hash(site, genres, 2)]
         #binding.pry
     end 
@@ -11,8 +10,7 @@ class Scraper
     def synopsis(site, genres, doc_index, anime_index)
         #returns the plot of the given anime 
         doc(anime_site(site, genres, doc_index, anime_index)).css("span[itemprop=\"description\"]").text
-        #doc(anime_site(site, genres, doc_index, anime_index)).css("span[itemprop=\"description\"]").text.gsub(/\r\n\r\n/,"\n\n\t")
-        #binding.pry 
+        #binding.pry
     end 
 
     def genre_list(site) 
@@ -32,7 +30,10 @@ class Scraper
 
     def genre_site(site, genres, doc_index)
         #url for genre's page
-        site.gsub("/anime.php", appendage(site, genres, doc_index))
+        site_dup = site.dup 
+        site_dup["/anime.php"] = appendage(site, genres, doc_index)
+        site_dup
+        #site.gsub("/anime.php", appendage(site, genres, doc_index))
     end 
 
     def doc(site)   

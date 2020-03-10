@@ -108,7 +108,7 @@ describe "Scraper" do
         it "will return a hash of an anime's information" do 
             anime_url = "https://myanimelist.net/anime.php"
 
-           scraped_inner_hash = scraper.inner_hash(anime_url, ["Action", "Fantasy", "Thriller"], 2, 0)
+           scraped_inner_hash = scraper.inner_hash(anime_url, ["Action", "Fantasy", "Thriller"], 2, 4)
 
            expect(scraped_inner_hash).to include(inner_hash_example)
         end 

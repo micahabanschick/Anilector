@@ -64,6 +64,7 @@ class Interface
 
     def results(site)
         choices = self.choices(site)
+        puts self.timer
         if choices.length == 1 
             puts ""
             puts ""
@@ -143,6 +144,7 @@ class Interface
         self.results(site)
         puts ""
         puts ""
+        puts self.timer 
         puts "Would you like to try again with new entries?"
         self.binary 
     end 
@@ -173,5 +175,13 @@ class Interface
             self.user.genres = input.split(",").map{|genre| genre.strip.capitalize}
         end 
     end 
+
+    def timer
+        #start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        #finish = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        start = Time.now 
+        finish = Time.now 
+        diff = finish - start # gets time is seconds as a float
+    end
 
 end 

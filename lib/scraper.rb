@@ -49,7 +49,7 @@ class Scraper
     end
 
     def inner_hash(site, genres, doc_index, anime_index)
-        {:name=>anime_name(site, genres, doc_index, anime_index), :genres=>anime_genres(site, genres, doc_index, anime_index), :synopsis=>synopsis(site, genre, doc_index, anime_index)}
+        {:name=>anime_name(site, genres, doc_index, anime_index), :genres=>anime_genres(site, genres, doc_index, anime_index), :synopsis=>synopsis(site, genres, doc_index, anime_index)}
     end
 
     def inner_array(site, genres, doc_index)

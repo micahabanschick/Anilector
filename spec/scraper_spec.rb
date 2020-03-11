@@ -46,8 +46,7 @@ describe "Scraper" do
                 However, Subaru immediately reawakens to a familiar scene—confronted by the same group of thugs, meeting Satella all over again—the enigma deepens as history inexplicably repeats itself.
                 
                 [Written by MAL Rewrite]"},
-            {:name=>"Another", :genres=>["Mystery", "Horror", "Supernatural", "Thriller", "School"], :synopsis=>
-                "In 1972, a popular student in Yomiyama North Middle School's class 3-3 named Misaki passed away during the school year. Since then, the town of Yomiyama has been shrouded by a fearful atmosphere, from the dark secrets hidden deep within.
+            {:name=>"Another", :genres=>["Mystery", "Horror", "Supernatural", "Thriller", "School"], :synopsis=>"In 1972, a popular student in Yomiyama North Middle School's class 3-3 named Misaki passed away during the school year. Since then, the town of Yomiyama has been shrouded by a fearful atmosphere, from the dark secrets hidden deep within.
 
                 Twenty-six years later, 15-year-old Kouichi Sakakibara transfers into class 3-3 of Yomiyama North and soon after discovers that a strange, gloomy mood seems to hang over all the students. He also finds himself drawn to the mysterious, eyepatch-wearing student Mei Misaki; however, the rest of the class and the teachers seem to treat her like she doesn't exist. Paying no heed to warnings from everyone including Mei herself, Kouichi begins to get closer not only to her, but also to the truth behind the gruesome phenomenon plaguing class 3-3 of Yomiyama North.
                 
@@ -62,18 +61,19 @@ describe "Scraper" do
     ]}
 
 
-    let!(:another_synopsis) {
-        "In 1972, a popular student in Yomiyama North Middle School's class 3-3 named Misaki passed away during the school year. Since then, the town of Yomiyama has been shrouded by a fearful atmosphere, from the dark secrets hidden deep within.
-
-        Twenty-six years later, 15-year-old Kouichi Sakakibara transfers into class 3-3 of Yomiyama North and soon after discovers that a strange, gloomy mood seems to hang over all the students. He also finds himself drawn to the mysterious, eyepatch-wearing student Mei Misaki; however, the rest of the class and the teachers seem to treat her like she doesn't exist. Paying no heed to warnings from everyone including Mei herself, Kouichi begins to get closer not only to her, but also to the truth behind the gruesome phenomenon plaguing class 3-3 of Yomiyama North.
-        
-        Another follows Kouichi, Mei, and their classmates as they are pulled into the enigma surrounding a series of inevitable, tragic events—but unraveling the horror of Yomiyama may just cost them the ultimate price.
-        
-        [Written by MAL Rewrite]"
+    let!(:another_synopsis) { "In 1972, a popular student in Yomiyama North Middle School's class 3-3 named Misaki passed away during the school year. Since then, the town of Yomiyama has been shrouded by a fearful atmosphere, from the dark 
+        secrets hidden deep within.\n\n            Twenty-six years later, 15-year-old Kouichi Sakakibara transfers into class 3-3 of Yomiyama North and soon after discovers that a strange, gloomy mood seems to hang over all the students. He also finds himself drawn to the mysterious, eyepatch-wearing student Mei Misaki; however, the rest of the class and the teachers seem to treat her like she doesn't exist. Paying no heed to warnings from everyone including Mei herself, Kouichi begins to get closer not only to her, but also to the truth behind the gruesome phenomenon plaguing class 3-3 of Yomiyama North.\n            \n            Another follows Kouichi, Mei, and their classmates as they are 
+        pulled into the enigma surrounding a series of inevitable, tragic events\u2014but unraveling the horror of Yomiyama may just cost them the ultimate price.\n            \n            [Written by MAL Rewrite]"
     }
 
     let!(:inner_hash_example) {
-        {:name=>"Another", :genres=>["Mystery","Horror","Supernatural","Thriller","School"], :synopsis=>another_synopsis}
+        {:name=>"Another", :genres=>["Mystery","Horror","Supernatural","Thriller","School"], :synopsis=>"In 1972, a popular student in Yomiyama North Middle School's class 3-3 named Misaki passed away during the school year. Since then, the town of Yomiyama has been shrouded by a fearful atmosphere, from the dark secrets hidden deep within.
+
+            Twenty-six years later, 15-year-old Kouichi Sakakibara transfers into class 3-3 of Yomiyama North and soon after discovers that a strange, gloomy mood seems to hang over all the students. He also finds himself drawn to the mysterious, eyepatch-wearing student Mei Misaki; however, the rest of the class and the teachers seem to treat her like she doesn't exist. Paying no heed to warnings from everyone including Mei herself, Kouichi begins to get closer not only to her, but also to the truth behind the gruesome phenomenon plaguing class 3-3 of Yomiyama North.
+            
+            Another follows Kouichi, Mei, and their classmates as they are pulled into the enigma surrounding a series of inevitable, tragic events—but unraveling the horror of Yomiyama may just cost them the ultimate price.
+            
+            [Written by MAL Rewrite]"}
     }
     
     describe "#synopsis" do
@@ -114,28 +114,11 @@ describe "Scraper" do
         end 
     end
 
-    describe "#anime_from_each_genre" do
-         it "will output an array" do
-            anime_url = "https://myanimelist.net/anime.php"
-
-            scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
-
-            expect(scraped_anime).to be_a(Array)
-        end
-
-        it "will have :genre and :anime" do
-            anime_url = "https://myanimelist.net/anime.php"
-
-            scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
-            
-            expect(scraped_anime.first).to have_key(:genre)
-            expect(scraped_anime.first).to have_key(:anime)
-        end
-
+    describe "#anime_options" do
         it "will scrape the top 5 anime from each genre on MAL into a hash" do
             anime_url = "https://myanimelist.net/anime.php"
 
-            scraped_anime = scraper.anime_from_each_genre(anime_url, ["Action", "Fantasy", "Thriller"])
+            scraped_anime = scraper.anime_options(anime_url, ["Action", "Fantasy", "Thriller"])
 
             expect(scraped_anime).to include(anime_array[2])
             #expect(scraped_anime).to include(anime_array[0], anime_array[1], anime_array[2])

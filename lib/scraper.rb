@@ -1,7 +1,7 @@
 class Scraper
 
 
-    def anime_from_each_genre(site, genres)
+    def anime_options(site, genres)
         #an array whose elements reveal the information for 5 anime from each given genre
         outer_array = [outer_hash(site, genres, 0), outer_hash(site, genres, 1), outer_hash(site, genres, 2)]
         #binding.pry

@@ -47,7 +47,7 @@ class Interface
     end 
 
     def choices(site)
-        includes_one = self.scraper.anime_from_each_genre(site, self.user.genres)
+        includes_one = self.scraper.anime_options(site, self.user.genres)
 
         includes_two = includes_one.map{|genre| genre[:anime].filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) || anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[2]) || anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}}.flatten.uniq 
 
@@ -64,7 +64,8 @@ class Interface
 
     def results(site)
         choices = self.choices(site)
-        puts self.timer
+        self.timer_finish
+        puts self.timer_diff
         if choices.length == 1 
             puts ""
             puts ""
@@ -141,10 +142,10 @@ class Interface
         puts ""
         puts "Please enter your three favorite genres (if you would like to see what genres translate to anime, enter 'list genres')."
         self.user_genres(site) 
+        self.timer_start
         self.results(site)
         puts ""
-        puts ""
-        puts self.timer 
+        puts "" 
         puts "Would you like to try again with new entries?"
         self.binary 
     end 
@@ -176,12 +177,18 @@ class Interface
         end 
     end 
 
-    def timer
-        #start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    def timer_start
+        start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         #finish = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        start = Time.now 
-        finish = Time.now 
-        diff = finish - start # gets time is seconds as a float
+        #diff = finish - start # gets time is seconds as a float
     end
+
+    def timer_finish
+        finish = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    end
+
+    def timer_diff
+        diff = self.timer_finish - self.timer_start 
+    end 
 
 end 

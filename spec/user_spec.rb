@@ -12,12 +12,18 @@ describe "User" do
         end 
     end
 =end 
-    describe "#name" do 
+    describe "#genres" do 
         it "will read @genres as array" do
+            inter = Interface.new(user)
+            inter.user_genres
+
+            allow($stdin).to receive(:gets).and_return("Action", "Fantasy", "Thriller")
+            genres = $stdin.gets
+
             user_genres = user.instance_variable_get(:@genres)
 
             expect(user_genres).to be_a(Array)
-            expect(user_genres).to_eq(["Action", "Fantasy", "Thriller"])
+            expect(user_genres).to_eq([genres]) #"Action", "Fantasy", "Thriller"
         end
     end
 

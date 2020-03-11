@@ -4,11 +4,7 @@ This CLI Application provides a short and effective test for determining the mos
 
 
 ## Installation
-Eithor use:
-```
-$ gem install anilector (Current choice)
-```
-or put the following inside your gemfile
+Enter the following inside your gemfile:
 ```
 gem "anilector", :git => "git://github.com/micahabanschick/Flatiron_CLI_Application.git"
 ```

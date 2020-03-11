@@ -1,6 +1,0 @@
-- [] setup basic environment
-- [] brainstorm ideas
-- [] find website to scrape
-- [] write all necessary tests
-- [] create multiple classes
-- [] pass all rspec tests

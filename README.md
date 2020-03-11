@@ -1,12 +1,12 @@
-# Flatiron_CLI_Application
+# Anilector
 
-This CLI Application provides a short and effective test for determining the most eligable anime to start one off on their otaku career. All one needs is to list three genre names, according to their preference, and the rest is sorted out by the application.
+Anilector is the anime selector of the ages. This CLI Application provides a short and effective test for determining the most eligable anime to start one off on their otaku career. All one needs is to list three genre names, according to their preference, and the rest is sorted out by the application.
 
 
 ## Installation
 Enter the following inside your gemfile:
 ```
-gem "anilector", :git => "git://github.com/micahabanschick/Flatiron_CLI_Application.git"
+gem "anilector", :git => "git://github.com/micahabanschick/Anilector.git"
 ```
 
 ## Usage 
@@ -18,9 +18,9 @@ $ ruby ./bin/anilector
 
 ## Contributing
 
-Anyone is welcome to report bugs and contribute with pull requests on Github at https://github.com/micahabanschick/Flatiron_CLI_Application.
+Anyone is welcome to report bugs and contribute with pull requests on [this](https://github.com/micahabanschick/Anilector.) Github page. 
 
 
 ## License 
 
-The gem is available as open source under the terms of the MIT License. 
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

@@ -3,5 +3,5 @@
 require_relative '../config/environment.rb' 
 
 site = "https://myanimelist.net/anime.php"
-test = Interface.new
-test.run(site)
+anilector = Anilector::Interface.new
+anilector.run(site)

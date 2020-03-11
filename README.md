@@ -4,16 +4,27 @@ This CLI Application provides a short and effective test for determining the mos
 
 
 ## Installation
+Eithor use:
 ```
-$ gem install <to-be-determined>
+$ gem install anilector (Current choice)
+```
+or put the following inside your gemfile
+```
+gem "anilector", :git => "git://github.com/micahabanschick/Flatiron_CLI_Application.git"
+```
+
+## Usage 
+Type the below and follow the on screen prompts.
+```
+$ ruby ./bin/anilector
 ```
 
 
 ## Contributing
 
-Anyone is welcome to report bugs and contribute with pull requests on Github at https://github.com/micahabanschick/Flatiron_CLI_Application. (WELL..SOON)
+Anyone is welcome to report bugs and contribute with pull requests on Github at https://github.com/micahabanschick/Flatiron_CLI_Application.
 
 
 ## License 
 
-The gem is (CURRENTLY NOT) available as open source under the terms of the MIT License. 
+The gem is available as open source under the terms of the MIT License. 

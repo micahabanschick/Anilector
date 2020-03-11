@@ -1,4 +1,4 @@
-class User
+class Anilector::User
 
     attr_accessor :name, :genres
 

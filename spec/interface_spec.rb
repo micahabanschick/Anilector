@@ -1,8 +1,8 @@
 require_relative '../config/environment.rb'
 require_relative './spec_helper.rb'
 
-describe "Interface" do
-    let(:interface) { Interface.new }
+describe "Anilector::Interface" do
+    let(:interface) { Anilector::Interface.new }
   
     describe "#run" do
       it "will run the program" do        

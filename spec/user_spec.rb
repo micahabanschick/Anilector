@@ -1,8 +1,8 @@
 require_relative '../config/environment.rb'
 require_relative './spec_helper.rb'
 
-describe "User" do
-    let!(:user) { User.new("Bob") }
+describe "Anilector::User" do
+    let!(:user) { Anilector::User.new("Bob") }
 =begin  
     describe "#name" do 
         it "will read the name" do
@@ -14,7 +14,7 @@ describe "User" do
 =end 
     describe "#genres" do 
         it "will read @genres as array" do
-            inter = Interface.new(user)
+            inter = Anilector::Interface.new(user)
             inter.user_genres
 
             allow($stdin).to receive(:gets).and_return("Action", "Fantasy", "Thriller")

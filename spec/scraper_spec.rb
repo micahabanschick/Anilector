@@ -1,8 +1,8 @@
 require_relative '../config/environment.rb'
 require_relative './spec_helper.rb'
 
-describe "Scraper" do
-    let!(:scraper) { Scraper.new }
+describe "Anilector::Scraper" do
+    let!(:scraper) { Anilector::Scraper.new }
 
     let!(:anime_array) {[
         {:genre=>"Action", :anime=>[

@@ -1,10 +1,10 @@
-class Interface
+class Anilector::Interface
 
     attr_accessor :user, :scraper 
 
     @@all = []
 
-    def initialize(user=User.new, scraper=Scraper.new) 
+    def initialize(user=Anilector::User.new, scraper=Anilector::Scraper.new) 
         @user = user 
         @scraper = scraper
         self.save

@@ -1,4 +1,4 @@
-class Scraper
+class Anilector::Scraper
 
 
     def anime_options(site, genres)

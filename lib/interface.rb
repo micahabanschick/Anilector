@@ -1,11 +1,10 @@
 class Anilector::Interface
 
-    attr_accessor :user, :scraper 
+    attr_accessor :scraper, :name, :genres
 
     @@all = []
 
-    def initialize(user=Anilector::User.new, scraper=Anilector::Scraper.new) 
-        @user = user 
+    def initialize(scraper=Anilector::Scraper.new)  
         @scraper = scraper
         self.save
     end 
@@ -19,13 +18,13 @@ class Anilector::Interface
     end 
 
     def welcome
-        puts "Welcome #{self.user.name}, and good luck!"
+        puts "Welcome #{self.name}, and good luck!"
     end 
 
     def user_name
         puts "Pleaser enter you name here"
         input_name = gets.strip
-        self.user.name = input_name 
+        @name = input_name 
     end 
 
     def start
@@ -47,11 +46,11 @@ class Anilector::Interface
     end 
 
     def choices(site)
-        includes_one = self.scraper.anime_options(site, self.user.genres)
+        includes_one = self.scraper.anime_options(site, self.genres)
 
-        includes_two = includes_one.map{|genre| genre[:anime].filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) || anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[2]) || anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}}.flatten.uniq 
+        includes_two = includes_one.map{|genre| genre[:anime].filter{|anime| anime[:genres].include?(self.genres[0]) && anime[:genres].include?(self.genres[1]) || anime[:genres].include?(self.genres[0]) && anime[:genres].include?(self.genres[2]) || anime[:genres].include?(self.genres[1]) && anime[:genres].include?(self.genres[2])}}.flatten.uniq 
 
-        includes_three = includes_two.filter{|anime| anime[:genres].include?(self.user.genres[0]) && anime[:genres].include?(self.user.genres[1]) && anime[:genres].include?(self.user.genres[2])}
+        includes_three = includes_two.filter{|anime| anime[:genres].include?(self.genres[0]) && anime[:genres].include?(self.genres[1]) && anime[:genres].include?(self.genres[2])}
 
         if includes_three.length > 0
             includes_three
@@ -82,12 +81,7 @@ class Anilector::Interface
             puts "We've narrowed your search down to two choices."
             puts "This final step is up to YOU!"
             puts "We'll provide a synopsis of each and you'll pick which description sounds the most appealing by entering \"1\" or \"2\"."
-            puts ""
-            puts "1:"
-            puts results[0][:synopsis]
-            puts ""
-            puts "2:"
-            puts results[1][:synopsis]
+            self.results_block(results)
             best = gets.strip 
             case best 
             when "1"
@@ -108,15 +102,7 @@ class Anilector::Interface
             puts "We've narrowed your search down to three choices."
             puts "This final step is up to YOU!"
             puts "We'll provide a synopsis of each and you'll pick which description sounds the most appealing by entering \"1\", \"2\", or \"3\"."
-            puts ""
-            puts "1:"
-            puts results[0][:synopsis]
-            puts ""
-            puts "2:"
-            puts results[1][:synopsis]
-            puts ""
-            puts "3:"
-            puts results[2][:synopsis]
+            self.results_block(results)
             best = gets.strip 
             case best 
             when "1"
@@ -135,6 +121,14 @@ class Anilector::Interface
             end
         end 
     end 
+
+    def results_block(array)
+        array.each do |element|
+            puts ""
+            puts "#{array.index(element) + 1}:"
+            puts element[:synopsis] 
+        end 
+    end
 
     def run(site)
         #binding.pry
@@ -173,7 +167,8 @@ class Anilector::Interface
             puts "Please enter a genre that can be found in anime, or enter 'list genres' to see your options."
             self.user_genres(site)
         else 
-            self.user.genres = input.split(",").map{|genre| genre.strip.capitalize}
+            @genres = input.split(",").map{|genre| genre.strip.capitalize}
+            self.genres.each{|genre| Anilector::Genre.new(genre)} if Anilector::Genre.all.find{|gen| gen.name == genre} == nil
         end 
     end 
 

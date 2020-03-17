@@ -4,6 +4,11 @@ class Anilector::Scraper
     def anime_options(site, genres)
         #an array whose elements reveal the information for 5 anime from each given genre
         outer_array = [outer_hash(site, genres, 0), outer_hash(site, genres, 1), outer_hash(site, genres, 2)]
+        #outer_array.each do |element|
+        #    if 
+        #end
+        #hash_genre = Anilector::Genre.all.find{|genre| genre.name == genres[doc_index]}
+        #hash_genre.details = hash if hash_genre.details != hash 
         #binding.pry
     end 
 
@@ -65,7 +70,7 @@ class Anilector::Scraper
     end 
 
     def outer_hash(site, genres, doc_index)
-        {:genre=>genres[doc_index], :anime=>inner_array(site, genres, doc_index)}
+       hash = {:genre=>genres[doc_index], :anime=>inner_array(site, genres, doc_index)}
     end
 #binding.pry
 end 

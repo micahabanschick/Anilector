@@ -1,10 +1,10 @@
-class Anilector::User
+class Anilector::Genre 
 
-    attr_accessor :name, :genres
+    attr_accessor :name, :details
 
     @@all = []
 
-    def initialize(name="Stranger")
+    def initialize(name)
         @name = name 
         self.save 
     end 
@@ -17,8 +17,4 @@ class Anilector::User
         @@all
     end 
 
-    def genres
-        @genres
-    end 
-
-end 
+end

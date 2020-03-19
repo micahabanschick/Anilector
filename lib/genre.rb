@@ -17,15 +17,14 @@ class Anilector::Genre
         @@all
     end 
 
+    def self.list 
+        @@list ||= Anilector::Scraper.new.genre_list
+    end
+
     def details 
-        if Anilector::Interface.all[0].genres[0] == self.name 
-            doc_index = 0
-        elsif Anilector::Interface.all[0].genres[1] == self.name
-            doc_index = 1
-        elsif Anilector::Interface.all[0].genres[2] == self.name
-            doc_index = 2
-        end
-        @details ||= Anilector::Scraper.new.outer_hash(Anilector::Interface.all[0].genres, doc_index)
+        genres = Anilector::Interface.all[0].genres
+        doc_index = genres.index(genres.find{|genre| genre == self.name})
+        @details ||= Anilector::Scraper.new.outer_hash(genres, doc_index)
     end
 
 end

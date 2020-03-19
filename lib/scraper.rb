@@ -23,19 +23,15 @@ class Anilector::Scraper
         outer_array
     end 
 
-    def synopsis(genres, doc_index, anime_index)
-        #returns the plot of the given anime 
+    def synopsis(genres, doc_index, anime_index) 
         doc(anime_site(genres, doc_index, anime_index)).css("span[itemprop=\"description\"]").text
-        #binding.pry
     end 
 
     def genre_list 
-        #an array that includes every genre name listed on the site
         doc(self.site).css("div.genre-list.al").map{|genre| genre.text.gsub(/(\(\d{1}\,?\d+\))/,"").strip if genre.children[0].attributes.values[0].value.include?("/genre/")}.filter{|text| text != nil}
     end
 
     def appendage(genres, doc_index)
-        #end piece added on to the site to get to the genre's page
         doc(self.site).css("a.genre-name-link").find{|genre| genre.text.match(genres[doc_index])}.attributes.values[0].value
     end 
 
@@ -44,7 +40,6 @@ class Anilector::Scraper
     end
 
     def genre_site(genres, doc_index)
-        #url for genre's page
         site_dup = self.site.dup 
         site_dup["/anime.php"] = appendage(genres, doc_index)
         site_dup
@@ -55,12 +50,10 @@ class Anilector::Scraper
     end
 
     def anime_name(genres, doc_index, anime_index)
-        #shortcut to get to the anime's name
         doc(genre_site(genres, doc_index)).css("p.title-text")[anime_index].text.strip
     end 
 
     def anime_genres(genres, doc_index, anime_index)
-        #shortcut to get an array of the anime's genres
         doc(genre_site(genres, doc_index)).css("div.genres-inner.js-genre-inner")[anime_index].children.map{|genre| genre.text.strip}
     end
 
@@ -81,5 +74,5 @@ class Anilector::Scraper
     def outer_hash(genres, doc_index)
        hash = {:genre=>genres[doc_index], :anime=>inner_array(genres, doc_index)}
     end
-#binding.pry
+    
 end 

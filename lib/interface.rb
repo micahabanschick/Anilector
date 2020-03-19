@@ -4,8 +4,8 @@ class Anilector::Interface
 
     @@all = []
 
-    def initialize(scraper=Anilector::Scraper.new)  
-        @scraper = scraper
+    def initialize 
+        @scraper = Anilector::Scraper.new
         self.save
     end 
 
@@ -74,61 +74,52 @@ class Anilector::Interface
             puts choices[0][:synopsis]
             puts ""
             puts "We hope you enjoy!"
-        elsif choices.length == 2 
-            results = choices.filter{|anime| choices.index(anime) < 2}
-            self.final_step(results)
-            self.preview(results)
-            self.recommendation_block(results, 2)
+        # elsif choices.length == 2 
+        #     results = choices.filter{|anime| choices.index(anime) < 2}
+        #     self.final_step(results)
+        #     self.preview(results)
+        #     self.recommendation_block(results, 2)
         else
-            results = choices.filter{|anime| choices.index(anime) < 3}
+            results = choices.filter{|anime| choices.index(anime) < choices.length}
             self.final_step(results)
             self.preview(results)
-            self.recommendation_block(results, 3)
+            self.recommendation_block(results, choices.length)
         end 
     end 
     
     def recommendation_block(array, size)
         best = gets.strip
-        if size == 3 
-            case best 
-            when "1"
-                self.recommendation(array, 0)
-            when "2"
-                self.recommendation(array, 1)
-            when "3"
-                self.recommendation(array, 2)
-            else 
-                puts "Invalid entry!"
-                puts "Please enter #{self.final_length(3)}."
-                self.results
-            end
-        elsif size == 2  
-            case best 
-            when "1"
-                self.recommendation(array, 0)
-            when "2"
-                self.recommendation(array, 1)
-            else 
-                puts "Invalid entry!"
-                puts "Please enter #{self.final_length(2)}."
-                self.results
-            end
+        if size <= array.length 
+            self.recommendation(array, best.to_i - 1)
+        else 
+            rec_invalid_statement(size)
+            #puts "Invalid entry!"
+            #puts "Please enter #{self.final_length(2)}."
+            #self.results
         end
     end
 
-    def final_step(array)
+    def rec_invalid_statement(size)
+        puts "Invalid entry!"
+        puts "Please enter #{self.final_length(size)}."
+        self.results
+    end
+
+    def final_step(length)
         puts ""
         puts ""
         puts "We've narrowed your search down to two choices."
         puts "This final step is up to YOU!"
-        puts "We'll provide a synopsis of each and you'll pick which description sounds the most appealing by entering #{self.final_length(array)}."
+        puts "We'll provide a synopsis of each and you'll pick which description sounds the most appealing by entering #{self.final_length(length)}."
     end
 
     def final_length(length)
         if length == 2
-            "\"1\" or \"2\""
+            options = "\"1\" or \"2\""
+            options
         elsif length == 3 
-            "\"1\", \"2\", or \"3\""
+            options = "\"1\", \"2\", or \"3\""
+            options
         end 
     end
 
@@ -159,11 +150,12 @@ class Anilector::Interface
     end 
 
     def user_genres
-        list = self.scraper.genre_list
+        list = Anilector::Genre.list
         input = gets.strip
         if input == "list genres"
             puts ""
-            puts list.join(", ").gsub(list[list.length - 1], "and #{list[list.length - 1]}")
+            list.each_with_index{|genre, index| if index % 3 == 0 then print "\n\n#{index + 1}. #{genre}" else print "\t\t\t#{index + 1}. #{genre}" end}
+            puts "\n\n"
             self.user_genres
         elsif !input.match(/,/)
             puts ""
